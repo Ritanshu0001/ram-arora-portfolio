@@ -3,6 +3,11 @@
   const cards = [...document.querySelectorAll('.certificate-card')];
   const filters = [...document.querySelectorAll('[data-filter]')];
   const results = document.getElementById('certificate-results');
+  const categoryLabels = {
+    finance: 'finance and markets ',
+    ai: 'AI and strategy ',
+    operations: 'operations and improvement '
+  };
   filters.forEach(button => button.addEventListener('click', () => {
     const category = button.dataset.filter;
     filters.forEach(item => {
@@ -11,7 +16,7 @@
     });
     cards.forEach(card => { card.hidden = category !== 'all' && card.dataset.category !== category; });
     const count = cards.filter(card => !card.hidden).length;
-    results.textContent = `Showing ${count} ${category === 'all' ? '' : category === 'ai' ? 'AI and strategy ' : 'finance and markets '}certificate${count === 1 ? '' : 's'}.`;
+    results.textContent = `Showing ${count} ${categoryLabels[category] || ''}certificate${count === 1 ? '' : 's'}.`;
   }));
   const dialog = document.querySelector('.certificate-dialog');
   const image = document.getElementById('viewer-image');
